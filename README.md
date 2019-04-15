@@ -1,2 +1,2 @@
 # projects
-A collection of interesting programming solutions I've done either in school or on my own time
+A collection of interesting programming solutions I've written either in school or on my own time
