@@ -1,5 +1,5 @@
 # An object-oriented implementation of a naive Bayes multinomial text classifier
-# Written by Graeme Prendergast for SENG474 Fall 2019
+# Written by Graeme Prendergast, Fall 2019
 
 import pandas as pd
 import numpy as np

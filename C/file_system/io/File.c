@@ -1,6 +1,5 @@
 /**
- * File.c -- CSC 360 Assignment 3, Spring 2020
- * Written by Graeme Prendergast, V00823043
+ * File.c - Written by Graeme Prendergast, Spring 2020
  */
 
 #include <stdio.h>

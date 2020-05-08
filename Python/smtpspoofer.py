@@ -1,10 +1,7 @@
-# CSC 361 Spring 2019
-# Assignment 3 - smtpspoofer.py
-# 
 # This is a pretty quick and simple program, but it just goes to show how shockingly easy it is to spoof email addresses using SMTP.
 # This is set up to use UVic's mailserver, but can be pretty easily altered to use some other server, and send to any email address.
 # 
-# Written by Graeme Prendergast
+# Written by Graeme Prendergast, Spring 2019
 
 from socket import *
 

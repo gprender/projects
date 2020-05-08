@@ -1,10 +1,4 @@
 /*
-  CSC 225 - Summer 2018
-  Assignment 3 - Ladder.java
-  Graeme Prendergast, V00823043
-
-  Based on the provided starter code
-
   This program takes as input a file containing a list of words, and then a start
   and end word in that file to construct a "Word Ladder" between.
 
@@ -18,6 +12,8 @@
   This program always finds an optimal world ladder (if there is one to be found)
   by constructing a graph and then using breadth-first search to find a valid
   path from start->end.
+  
+  Written by Graeme Prendergast, Summer 2018
 */
 
 import java.io.*;

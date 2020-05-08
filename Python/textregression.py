@@ -3,7 +3,7 @@
 # taco or burrito based on its description, but can be generalized to any
 # case of predicting a continuous attribute based on text data.
 #
-# Written by Graeme Prendergast as part of a term project for SENG 474, Fall 2019
+# Written by Graeme Prendergast as part of a term project, Fall 2019
 
 import re
 
