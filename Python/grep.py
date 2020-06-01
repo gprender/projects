@@ -37,7 +37,7 @@ class Expression:
                 if remaining == False:
                     return False
 
-        return True
+        return (remaining == '')
 
 
 class Primitive:
