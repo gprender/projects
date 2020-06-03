@@ -10,7 +10,6 @@
 
 '''
 TODO List:
- - Parentheses
  - Union/Or (The '|' symbol)
 '''
 
@@ -18,28 +17,38 @@ class Expression:
     '''A parent expression, comprised of 1 or more sub-expressions.'''
     def __init__(self, pattern):
         self.subexpressions = []
-        for char in pattern:
-            if char == '*': # Wrap the previous expression in a Star
+        # Annoyingly, we need a C-style FOR loop here so that we can jump
+        # through the pattern string. This becomes necessary when we include
+        # parentheses, since we just want to recurse on paren contents.
+        i = 0
+        while i < len(pattern):
+            char = pattern[i]   
+            if char == '(': # Make a new expression for the paren's contents
+                paren_contents = get_paren_contents(pattern[i:])
+                self.subexpressions.append(Expression(paren_contents))
+                i += (len(paren_contents) + 2)
+            elif char == '*': # Wrap the previous expression in a Star
                 prev = self.subexpressions[-1]
                 self.subexpressions[-1] = Star(prev)
+                i += 1
             else:
                 self.subexpressions.append(Primitive(char))
+                i += 1
 
     def __str__(self):
         str_subexprs = [str(expr) for expr in self.subexpressions]
         return f"[ {', '.join(str_subexprs)} ]" 
 
-    def eval(self, string): # There might be a cleaner way to do this?
+    def eval(self, string):
         '''Recursively evaluate an expression for the given string.'''
         remaining = string
         for expr in self.subexpressions:
-            if remaining == '':
+            if remaining == '': # Our input string has run out
                 return False
-            else:
-                remaining = expr.eval(remaining)
-                if remaining == False:
-                    return False
-        return remaining == ''
+            remaining = expr.eval(remaining)
+            if remaining == False: # A subexpression failed to match
+                return False
+        return remaining
 
 
 class Primitive:
@@ -76,6 +85,21 @@ class Star:
         return remaining
 
 
+def get_paren_contents(string):
+    '''Return all the characters inside of set of parentheses.'''
+    length = 0
+    balance = 0
+    for char in string:
+        if char == '(':
+            balance += 1
+        if char == ')':
+            balance -= 1
+        length += 1
+        if balance == 0:
+            return string[1:length-1]
+    raise Exception("The given pattern has unbalanced parantheses!")
+
+
 def main():
     foo = Expression("abba")
     print(foo)
@@ -90,6 +114,15 @@ def main():
     print(bar.eval("abbbbbbbbbbba"))
     print(bar.eval("aa"))
     print(bar.eval("anaconda"))
+
+    print()
+
+    baz = Expression("(a(ba)*c)*a")
+    print(baz)
+    print(baz.eval("ababababacabaca"))
+    print(baz.eval("aca"))
+    print(baz.eval("a"))
+    print(baz.eval("ababca"))
 
 
 if __name__ == '__main__':
